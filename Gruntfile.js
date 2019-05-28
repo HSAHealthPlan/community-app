@@ -22,6 +22,12 @@ module.exports = function(grunt) {
                 livereload: true
             }
         },
+        config: { 
+            files: ['<%= mifosx.app %>/config.json'],
+            options: {
+                livereload: true
+            }
+        },
         scss: {
             files: ['<%= mifosx.app %>/styles-dev/**/*.scss'],
             tasks: ['compass:dev']
@@ -114,8 +120,8 @@ module.exports = function(grunt) {
           //:['<%= mifosx.app %>/bower_components/requirejs/require.js'],
           '<%= mifosx.dist %>/<%=mifosx.target%>/bower_components/underscore/underscore.min.js'
           :['<%= mifosx.app %>/bower_components/underscore/underscore.js'],
-           '<%= mifosx.dist %>/<%=mifosx.target%>/bower_components/angular-utils-pagination/dirPagination.min.js'
-                :['<%= mifosx.app %>/bower_components/angular-utils-pagination/dirPagination.js']
+          '<%= mifosx.dist %>/<%=mifosx.target%>/bower_components/angular-utils-pagination/dirPagination.min.js'
+          :['<%= mifosx.app %>/bower_components/angular-utils-pagination/dirPagination.js']
         }]
       }
     },
@@ -149,6 +155,7 @@ module.exports = function(grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '.nojekyll',
+            'config.json',
             'images/{,*/}*.{webp}',
             'fonts/*',
             'images/*',
@@ -163,7 +170,7 @@ module.exports = function(grunt) {
             '!scripts/mifosXComponents-build.js',
             '!scripts/loader.js',
             '!scripts/loader-build.js',
-            'styles/**.css',
+            'styles/**',
             '!scripts/mifosXStyles.js',
             '!scripts/mifosXStyles-build.js',
             'global-translations/**',
@@ -196,6 +203,7 @@ module.exports = function(grunt) {
           src: [
             '**/*min.js', 'ckeditor/**', 'chosen/**', 'require-css/*.js', 'require-less/*.js',
             '!jasmine/**', '!requirejs/**/**', 'requirejs/require.js', '!underscore/**',
+            'angular-bootstrap/**', 'ng-scrollbar/**',
             'angular-utils-pagination/dirPagination.tpl.html'
           ]
         }
@@ -210,6 +218,7 @@ module.exports = function(grunt) {
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
+            'config.json',
             'images/{,*/}*.{webp}',
             'fonts/*',
             'scripts/**/*.js',
@@ -425,7 +434,7 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['clean', 'jshint', 'copy:dev']);
-  grunt.registerTask('prod', ['clean:dist', 'clean:server', 'compass:dist', 'copy:prod', 'copy:tests', 'concat', 'uglify:prod', 'devcode:dist', 'hashres','replace']);
+  grunt.registerTask('prod', ['clean:dist', 'clean:server', 'compass:dist', 'copy:prod', 'copy:tests', 'concat', 'uglify:prod', 'devcode:dist', /*'hashres',*/ 'replace']);
   grunt.registerTask('dev', ['clean', 'compass:dev', 'copy:dev']);
   grunt.registerTask('test', ['karma']);
   grunt.registerTask('deploy', ['prod', 'gh-pages']);
